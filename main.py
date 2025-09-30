@@ -23,12 +23,12 @@ def has_negative(float_list):
     return False
 
 
-def pdf_analyse_and_rename(file):
-    reader = PdfReader(file)
-    number_of_pages = len(reader.pages)
-    page = reader.pages[0]
+def pdf_analyse_and_rename(pdf_reader):
+    # reader = PdfReader(file)
+    number_of_pages = len(pdf_reader.pages)
+    page = pdf_reader.pages[0]
     text = page.extract_text()
-    print(text)
+    # print(text)
 
     if not (("发票" in text) or ("收费票据" in text)):
         return (
@@ -67,7 +67,7 @@ def pdf_analyse_and_rename(file):
                 else:
                     amounts = [float(x) for x in amounts2]
             max_amount = max(amounts)
-            print(max_amount)
+            print(f"最大金额为：{max_amount}")
             # new_file = f'{file[:-4]}_{max_amount}.pdf'
             new_file = f"{max_amount}.pdf"
             # 这里重命名情况比较罕见
@@ -99,8 +99,15 @@ def pdf_analyse_and_rename(file):
 if __name__ == "__main__":
     print_hi("PyCharm")
 
-    file = (
-        "dzfp_24312000000381259558_上海临港益邦智能技术股份有限公司_20241204201232.pdf"
-    )
-    pdf_analyse_and_rename(file)
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    file = "D:\\develops\\python\\office_tools\\503280.0.pdf"
+    # 打开 PDF 文件
+    pdf_file_path = file  # 指定 PDF 文件路径
+    with open(pdf_file_path, "rb") as file:  # 以二进制模式打开文件
+        pdf_reader = PdfReader(pdf_file_path)  # 创建 PDF 阅读器对象
+
+    # 获取 PDF 页数
+    num_pages = len(pdf_reader.pages)  # 获取 PDF 文件总页数
+    print(f"总页数: {num_pages}")  # 打印总页数
+    # print(pdf_reader.pages[0].extract_text())  # 提取第一页文本
+
+    pdf_analyse_and_rename(pdf_reader)
