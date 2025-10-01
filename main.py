@@ -23,7 +23,7 @@ def has_negative(float_list):
     return False
 
 
-def pdf_analyse_and_rename(pdf_reader, pdf_file_path, out_path):
+def pdf_analyse_and_rename(pdf_reader, pdf_file_path):
     # reader = PdfReader(file)
     number_of_pages = len(pdf_reader.pages)
     page = pdf_reader.pages[0]
@@ -72,7 +72,7 @@ def pdf_analyse_and_rename(pdf_reader, pdf_file_path, out_path):
             new_file = f"{max_amount}.pdf"
             print(f"新文件名：{new_file}")
             print(f"当前文件名：{pdf_file_path}")
-            os.chdir(pdf_file_path)
+            # os.chdir(pdf_file_path)
             print(f"是否存在同名文件：{os.path.exists(new_file)}")
             print(f"当前工作目录：{os.getcwd()}")
             # 这里重命名情况比较罕见
@@ -135,4 +135,4 @@ if __name__ == "__main__":
     result = create_folder(out_path)
     # print(result)
 
-    pdf_analyse_and_rename(pdf_reader, pdf_file_path, out_path)
+    pdf_analyse_and_rename(pdf_reader, pdf_file_path)
