@@ -72,7 +72,9 @@ def pdf_analyse_and_rename(pdf_reader, pdf_file_path, out_path):
             new_file = f"{max_amount}.pdf"
             print(f"新文件名：{new_file}")
             print(f"当前文件名：{pdf_file_path}")
+            os.chdir(pdf_file_path)
             print(f"是否存在同名文件：{os.path.exists(new_file)}")
+            print(f"当前工作目录：{os.getcwd()}")
             # 这里重命名情况比较罕见
             if os.path.exists(new_file):
                 return (f"重命名失败！该目录下已有同名文件{new_file}", "warning")
@@ -80,7 +82,7 @@ def pdf_analyse_and_rename(pdf_reader, pdf_file_path, out_path):
                 try:
                     # 更改PDF文件名称
                     os.renames(pdf_file_path, new_file)
-                    os.system("copy " + new_file + " " + pdf_file_path)  # Windows
+                    os.system("copy " + new_file + " " + out_path)  # Windows
                     return (f"重命名成功！{new_file}", "message")
                 except OSError as e:
                     # 捕捉异常并执行相应的操作
