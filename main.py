@@ -23,7 +23,7 @@ def has_negative(float_list):
     return False
 
 
-def pdf_analyse_and_rename(pdf_reader):
+def pdf_analyse_and_rename(pdf_reader, pdf_file_path, out_path):
     # reader = PdfReader(file)
     number_of_pages = len(pdf_reader.pages)
     page = pdf_reader.pages[0]
@@ -32,7 +32,7 @@ def pdf_analyse_and_rename(pdf_reader):
 
     if not (("发票" in text) or ("收费票据" in text)):
         return (
-            f"注意：{file}可能不是电子发票原件。如果确认是电子发票原件，请发送报错文件给limengcheng@akic.tech",
+            f"注意：{pdf_file_path}可能不是电子发票原件。如果确认是电子发票原件，请发送报错文件给limengcheng@akic.tech",
             "warning",
         )
     else:
@@ -41,7 +41,7 @@ def pdf_analyse_and_rename(pdf_reader):
         count = text.count("\x0c")
         if count > 1:
             return (
-                f"注意：{file}可能有多张电子发票或存在备注页，为最大程度避免您的资金损失，建议手动重命名。",
+                f"注意：{pdf_file_path}可能有多张电子发票或存在备注页，为最大程度避免您的资金损失，建议手动重命名。",
                 "warning",
             )
         amounts = re.findall(r"[¥￥\n]\s*([-]?\d+\.\d{2})", text)
@@ -51,7 +51,7 @@ def pdf_analyse_and_rename(pdf_reader):
         # 通常来说，要么只有1个人民币字符，要么3个金额，1个含税，1个不含税，1个税费，甚至更多个的情况。
         if len(amounts2) == 2 and len(set(amounts2)) == 2:
             return (
-                f"警告：{file}中识别到有效¥字符的金额异常，请手动检查文件以确保所有金额都已正确识别。",
+                f"警告：{pdf_file_path}中识别到有效¥字符的金额异常，请手动检查文件以确保所有金额都已正确识别。",
                 "warning",
             )
 
@@ -70,14 +70,17 @@ def pdf_analyse_and_rename(pdf_reader):
             print(f"最大金额为：{max_amount}")
             # new_file = f'{file[:-4]}_{max_amount}.pdf'
             new_file = f"{max_amount}.pdf"
+            print(f"新文件名：{new_file}")
+            print(f"当前文件名：{pdf_file_path}")
+            print(f"是否存在同名文件：{os.path.exists(new_file)}")
             # 这里重命名情况比较罕见
             if os.path.exists(new_file):
                 return (f"重命名失败！该目录下已有同名文件{new_file}", "warning")
             else:
                 try:
                     # 更改PDF文件名称
-                    os.renames(file, new_file)
-                    os.system("copy " + new_file + " " + file)  # Windows
+                    os.renames(pdf_file_path, new_file)
+                    os.system("copy " + new_file + " " + pdf_file_path)  # Windows
                     return (f"重命名成功！{new_file}", "message")
                 except OSError as e:
                     # 捕捉异常并执行相应的操作
@@ -95,11 +98,25 @@ def pdf_analyse_and_rename(pdf_reader):
             return (f"{file}没有识别到该发票的相关金额。", "warning")
 
 
+def create_folder(folder_path):
+    """
+    创建指定路径的文件夹
+    :param folder_path: 要创建的文件夹路径
+    :return: 返回创建结果信息
+    """
+    try:
+        os.makedirs(folder_path, exist_ok=True)
+        return f"文件夹 '{folder_path}' 创建成功"
+    except Exception as e:
+        return f"创建文件夹失败: {str(e)}"
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == "__main__":
     print_hi("PyCharm")
 
-    file = "D:\\develops\\python\\office_tools\\503280.0.pdf"
+    # file = "D:\\develops\\python\\office_tools\\503280.0.pdf"
+    file = "503280.0.pdf"
     # 打开 PDF 文件
     pdf_file_path = file  # 指定 PDF 文件路径
     with open(pdf_file_path, "rb") as file:  # 以二进制模式打开文件
@@ -109,5 +126,11 @@ if __name__ == "__main__":
     num_pages = len(pdf_reader.pages)  # 获取 PDF 文件总页数
     print(f"总页数: {num_pages}")  # 打印总页数
     # print(pdf_reader.pages[0].extract_text())  # 提取第一页文本
+    current_path = os.path.dirname(os.path.abspath(__file__))
+    # print(current_path)
+    out_path = current_path + "\output"
+    # print(out_path)
+    result = create_folder(out_path)
+    # print(result)
 
-    pdf_analyse_and_rename(pdf_reader)
+    pdf_analyse_and_rename(pdf_reader, pdf_file_path, out_path)
