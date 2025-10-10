@@ -44,11 +44,13 @@ if __name__ == "__main__":
     # print(f"当前路径：{current_path}")
     # print(f"输入路径：{input_path}")
     # print(f"输出路径：{output_path}")
-    df = pd.DataFrame(columns=["file_name", "money"])
+    df = pd.DataFrame(columns=["file_name", "invoice_num", "money"])
 
     # 遍历输入路径下的所有文件
     for file in os.listdir(input_path):
         if file.endswith(".pdf"):
+            file_name = file.split(".")[0]
+            print(f"原文件名：{file_name}.pdf")
             pdf_file_path = os.path.join(input_path, file)
             print(f"当前处理文件：{pdf_file_path}")
             # 打开 PDF 文件
@@ -61,7 +63,7 @@ if __name__ == "__main__":
                 text = page.extract_text()
                 # print(text)
 
-                if not (("发票" in text) or ("收费票据" in text)):
+                if not (("发票" in text) or ("收费票据" in text) or ("通行票" in text)):
                     print(
                         f"注意：{pdf_file_path}可能不是电子发票原件。如果确认是电子发票原件，请发送报错文件给16923071@qq.com"
                     )
@@ -73,6 +75,7 @@ if __name__ == "__main__":
                         print(
                             f"注意：{pdf_file_path}可能有多张电子发票或存在备注页，为最大程度避免您的资金损失，建议手动重命名。"
                         )
+                    invoice_num = re.findall(r"发票号码[::\n]\s*(\d+)", text)
                     amounts = re.findall(r"[¥￥\n]\s*([-]?\d+\.\d{2})", text)
                     amounts2 = re.findall(r"[¥￥]\s*(\d+\.\d{2})", text)
                     max_amount = 0
@@ -96,13 +99,18 @@ if __name__ == "__main__":
                         max_amount = max(amounts)
                         # print(f"最大金额为：{max_amount}")
                         # new_file = f'{file[:-4]}_{max_amount}.pdf'
-                        new_file = f"{max_amount}.pdf"
+                        # new_file = f"{max_amount}.pdf"
+                        new_file = f"{file_name}.pdf"
                         new_file_path = os.path.join(output_path, new_file)
                         print(f"新文件名：{new_file_path}")
                         shutil.copy2(pdf_file_path, new_file_path)
-                        new_row = {"file_name": new_file, "money": max_amount}
+                        new_row = {
+                            "file_name": file,
+                            "invoice_num": invoice_num,
+                            "money": max_amount,
+                        }
                         print(new_row)
-                        print(df)
+                        # print(df)
                         df.loc[len(df)] = new_row
-                        print(df)
+                        # print(df)
             df.to_excel(output_path + "\\invoice_analyse.xlsx", index=False)
