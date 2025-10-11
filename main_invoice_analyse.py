@@ -100,23 +100,38 @@ if __name__ == "__main__":
                             f"注意：{pdf_file_path}可能有多张电子发票或存在备注页，为最大程度避免您的资金损失，建议手动重命名。"
                         )
                     if "铁路" in text:
-                        invoice_num = re.findall(r"发票号码 [:：]\s*(\d+)", text)
-                        if invoice_num:
-                            invoice_num = invoice_num[0]
+                        last_year = text.rfind("年")
+                        last_month = text.rfind("月")
+                        print(last_month - last_year)
+                        if last_month - last_year > 3:
+                            year = text[(last_year - 5) : (last_year - 1)]
+                            print(year)
+                            month = text[(last_month - 3) : (last_month - 1)]
+                            print(month)
+                            day = text[(last_month + 2) : (last_month + 4)]
+                            print(day)
                         else:
-                            invoice_num = ""
+                            year = text[(last_year - 4) : (last_year)]
+                            print(year)
+                            month = text[(last_month - 2) : (last_month)]
+                            print(month)
+                            day = text[(last_month + 1) : (last_month + 3)]
+                            print(day)
+
+                        pos_fapiao = text.find("发票号码")
+                        print(text[pos_fapiao + 5])
+                        if text[pos_fapiao + 5] == ":":
+                            invoice_num = re.findall(r"发票号码 [:：]\s*(\d+)", text)[0]
+                            print(invoice_num)
+                        else:
+                            invoice_num = re.findall(r"发票号码[:：]\s*(\d+)", text)[0]
+                            print(invoice_num)
+
+                        print(f"invoice_num：{invoice_num}")
                         fapiao_num = ""
-                        if fapiao_num:
-                            fapiao_num = fapiao_num[0]
-                        else:
-                            fapiao_num = ""
-                        year = re.findall(r"开票日期 [:：]\s*(\d{4})", text)
-                        # print(year[0])
-                        month = re.findall(r"年\s*(\d{2})", text)
-                        # print(month[1])
-                        day = re.findall(r"月\s*(\d{2})", text)
-                        # print(day[1])
-                        invoice_day = f"{year[0]}-{month[1]}-{day[1]}"
+                        print(f"fapiao_num：{fapiao_num}")
+
+                        invoice_day = f"{year}.{month}.{day}"
                         print(f"invoice_day：{invoice_day}")
                         amounts = re.findall(r"[¥￥\n]\s*([-]?\d+\.\d{2})", text)
                         amounts2 = re.findall(r"[¥￥]\s*(\d+\.\d{2})", text)
@@ -127,7 +142,6 @@ if __name__ == "__main__":
                             print(
                                 f"警告：{pdf_file_path}中识别到有效¥字符的金额异常，请手动检查文件以确保所有金额都已正确识别。"
                             )
-
                         if amounts:
                             amounts = [float(x) for x in amounts]
                             # 通常情况都是取金额最大的，除非有负数出现，那样就再做一轮筛选，用人民币字符去筛选出来。
@@ -138,18 +152,21 @@ if __name__ == "__main__":
                                     )
                                 else:
                                     amounts = [float(x) for x in amounts2]
-                            max_amount = max(amounts)
+                        max_amount = max(amounts)
+                        min_amount = min(amounts)
                         print(f"max_amount：{max_amount}")
-                        tax = max_amount / 1.09 * 0.09
+                        tax = min_amount
                         tax = f"{tax:.2f}"
                         print(f"tax：{tax}")
                         deduction = tax
-                        buyer_num = re.findall(r"统一社会信用代码 [:：]\s*(\d+)", text)
+                        buyer_num = re.findall(r"中国水电基础局有限公司\s*(\d+)", text)
+                        # print(buyer_num[0])
                         if buyer_num:
                             buyer_num = buyer_num[0]
                         else:
-                            buyer_num = ""
+                            buyer_num = "911202221030604602"
                         print(f"buyer_num：{buyer_num}")
+
                     elif "通行费" in text:
                         last_year = text.rfind("年")
                         fapiao_num = text[(last_year - 13) : (last_year - 5)]
@@ -198,19 +215,24 @@ if __name__ == "__main__":
                         else:
                             buyer_num = ""
                         print(f"buyer_num：{buyer_num}")
+
                     elif "增值税专用发票" in text:
                         last_year = text.find("年")
                         invoice_num = text[(last_year - 25) : (last_year - 5)]
                         print(f"invoice_num：{invoice_num}")
                         fapiao_num = ""
                         print(f"fapiao_num：{fapiao_num}")
-                        year = text[(last_year - 5) : (last_year - 1)]
+                        last_month = text.find("月")
+                        if last_month - last_year > 3:
+                            year = text[(last_year - 5) : (last_year - 1)]
+                        else:
+                            year = text[(last_year - 4) : (last_year)]
                         print(year)
                         month = re.findall(r"年\s*(\d{2})", text)
                         print(month[0])
                         day = re.findall(r"月\s*(\d{2})", text)
                         print(day[0])
-                        invoice_day = f"{year[0][:4]}.{month[0]}.{day[0]}"
+                        invoice_day = f"{year}.{month[0]}.{day[0]}"
                         print(f"invoice_day：{invoice_day}")
                         amounts = re.findall(r"[¥￥\n]\s*([-]?\d+\.\d{2})", text)
                         amounts2 = re.findall(r"[¥￥]\s*(\d+\.\d{2})", text)
@@ -243,7 +265,7 @@ if __name__ == "__main__":
                         if buyer_num:
                             buyer_num = buyer_num[0]
                         else:
-                            buyer_num = ""
+                            buyer_num = "911202221030604602"
                         print(f"buyer_num：{buyer_num}")
                     else:
                         print(
