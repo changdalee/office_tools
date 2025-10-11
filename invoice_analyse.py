@@ -55,7 +55,7 @@ def invoice_train(text, df):
         invoice_num = re.findall(r"发票号码[:：]\s*(\d+)", text)[0]
         # print(invoice_num)
 
-    print(f"invoice_num：{invoice_num}")
+    # print(f"invoice_num：{invoice_num}")
     fapiao_num = ""
     # print(f"fapiao_num：{fapiao_num}")
 
@@ -316,31 +316,27 @@ if __name__ == "__main__":
                 text = page.extract_text()
                 # print(text)
 
-                if not (("发票" in text) or ("收费票据" in text) or ("通行票" in text)):
+                # 发票金额栏能有2种¥￥开头以及1种未识别到的情况，所以需要匹配[¥￥\n]3种字符
+                # 匹配能够独立识别的浮点数
+                count = text.count("\x0c")
+                if count > 1:
                     print(
-                        f"注意：{pdf_file_path}可能不是电子发票原件。如果确认是电子发票原件，请发送报错文件给16923071@qq.com"
+                        f"注意：{pdf_file_path}可能有多张电子发票或存在备注页，为最大程度避免您的资金损失，建议手动重命名。"
                     )
+                if "铁路" in text:
+                    invoice_train(text, df)
+                    print(f"{file_name}.pdf 处理完成")
+                elif "通行费" in text:
+                    invoice_highway(text, df)
+                    print(f"{file_name}.pdf 处理完成")
+                elif "增值税专用发票" in text:
+                    invoice_vat(text, df)
+                    print(f"{file_name}.pdf 处理完成")
                 else:
-                    # 发票金额栏能有2种¥￥开头以及1种未识别到的情况，所以需要匹配[¥￥\n]3种字符
-                    # 匹配能够独立识别的浮点数
-                    count = text.count("\x0c")
-                    if count > 1:
-                        print(
-                            f"注意：{pdf_file_path}可能有多张电子发票或存在备注页，为最大程度避免您的资金损失，建议手动重命名。"
-                        )
-                    if "铁路" in text:
-                        invoice_train(text, df)
+                    print(
+                        f"{file_name}.pdf 文件是其他发票类型，暂不支持, 请联系开发人员:李昌达,16621318031"
+                    )
+                    # exit(1)
 
-                    elif "通行费" in text:
-                        invoice_highway(text, df)
-
-                    elif "增值税专用发票" in text:
-                        invoice_vat(text, df)
-                    else:
-                        print(
-                            "其他发票类型，暂不支持, 请联系开发人员:李昌达,16621318031"
-                        )
-                        exit(1)
-                print(f"{file_name}.pdf 处理完成")
-            df.to_excel(output_path + "\\invoice_analyse.xlsx", index=False)
-            print(f"invoice_analyse.xlsx 已经保存完成")
+    df.to_excel(output_path + "\\invoice_analyse.xlsx", index=False)
+    print(f"Congratulations! the invoice_analyse.xlsx 已经保存完成")
