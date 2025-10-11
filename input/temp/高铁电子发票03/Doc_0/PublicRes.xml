@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ofd:Res xmlns:ofd="http://www.ofdspec.org/2016" BaseLoc="Res"><ofd:Fonts><ofd:Font ID="8" FontName="SimSun" FamilyName="SimSun"/><ofd:Font ID="11" FontName="SimHei" FamilyName="SimHei"/><ofd:Font ID="22" FontName="DengXian" FamilyName="DengXian"/><ofd:Font ID="23" FontName="KaiTi" FamilyName="KaiTi"/></ofd:Fonts></ofd:Res>

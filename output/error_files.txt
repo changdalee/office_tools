@@ -1,0 +1,2 @@
+以下为本次运行无法识别的文件
+d:\develops\python\office_tools\input\全电44-176.71.pdf ,该发票金额有问题,程序无法读取发票金额,请人工检查后单独处理
