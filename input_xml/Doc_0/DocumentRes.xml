@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><ofd:Res xmlns:ofd="http://www.ofdspec.org/2016" BaseLoc="Res"><ofd:MultiMedias><ofd:MultiMedia ID="37" Type="Image" Format="JPG"><ofd:MediaFile>image_jt.jpg</ofd:MediaFile></ofd:MultiMedia><ofd:MultiMedia ID="631" Type="Image" Format="png"><ofd:MediaFile>Image_331.png</ofd:MediaFile></ofd:MultiMedia></ofd:MultiMedias><ofd:CompositeGraphicUnits><ofd:CompositeGraphicUnit ID="1111" Width="210" Height="297"><ofd:Content ID="1005" Type="Body"><ofd:PageBlock ID="1006"><ofd:PathObject ID="3" Boundary="-0.5 -0.5 31 21" LineWidth="1">
+<ofd:StrokeColor ColorSpace="4" Value="255 0 0"></ofd:StrokeColor>
+<ofd:AbbreviatedData>M 1 10.5 B 1 5.253294 7.491871 1 15.5 1 B 23.50813 1 30 5.253294 30 10.5 B 30 15.74671 23.50813 20 15.5 20 B 7.491871 20 1 15.74671 1 10.5 C</ofd:AbbreviatedData>
+</ofd:PathObject>
+<ofd:PathObject ID="5" Boundary="1.2 1.2 27.6 17.6" LineWidth="0.3">
+<ofd:StrokeColor ColorSpace="4" Value="255 0 0"></ofd:StrokeColor>
+<ofd:AbbreviatedData>M 0.3 8.8 B 0.3 4.105579 6.344156 0.3 13.8 0.3 B 21.25584 0.3 27.3 4.105579 27.3 8.8 B 27.3 13.49442 21.25584 17.3 13.8 17.3 B 6.344156 17.3 0.3 13.49442 0.3 8.8 C</ofd:AbbreviatedData>
+</ofd:PathObject>
+<ofd:TextObject ID="6" Boundary="4.5 7.5913 38 8.94" Size="2.47" Font="23">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="2" Y="4.299" DeltaX="2.906 2.906 2.906 2.906 2.906">国家税务总局</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="8" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.2646864 -0.9643345 0.9643345 0.2646864 3.707355 8.771232">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">全</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="9" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.7177994 -0.69625 0.69625 0.7177994 5.681031 6.191306">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">国</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="10" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.9039345 -0.4276708 0.4276708 0.9039345 8.568973 4.611373">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">统</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="11" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.9792943 -0.2024418 0.2024418 0.9792943 11.74882 3.765168">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">一</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="12" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.9999982 0.001868159 -0.001868159 0.9999982 15.03063 3.500023">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">发</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="13" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.9785157 0.2061719 -0.2061719 0.9785157 18.30859 3.774823">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">票</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="14" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.9018022 0.4321488 -0.4321488 0.9018022 21.48752 4.633053">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">监</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="15" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.7130773 0.7010853 -0.7010853 0.7130773 24.36195 6.225128">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">制</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="16" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.2538567 0.9672418 -0.9672418 0.2538567 26.30997 8.823247">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">章</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="17" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.8838825 -0.4677091 0.4677091 0.8838825 21.92608 15.18891">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">局</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="18" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.96377 -0.2667346 0.2667346 0.96377 19.2211 16.0463">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">务</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="19" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.9962479 -0.08654551 0.08654551 0.9962479 16.41356 16.45071">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">税</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="20" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.9961727 0.0874062 -0.0874062 0.9961727 13.57249 16.44973">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">省</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="21" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.9634631 0.2678411 -0.2678411 0.9634631 10.7626 16.04266">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">徽</ofd:TextCode>
+</ofd:TextObject>
+<ofd:TextObject ID="22" Boundary="0 0 30 20" Size="2.47" Font="23" CTM="0.8830355 0.469306 -0.469306 0.8830355 8.05465 15.18068">
+<ofd:FillColor ColorSpace="4" Value="255 0 0"></ofd:FillColor>
+<ofd:TextCode X="-1.235" Y="0.8904">安</ofd:TextCode>
+</ofd:TextObject>
+</ofd:PageBlock></ofd:Content></ofd:CompositeGraphicUnit></ofd:CompositeGraphicUnits></ofd:Res>
